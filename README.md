@@ -1,6 +1,6 @@
 # env-ISCE2-MintPy-MiaplPy
 
-## First, install the miniforge3
+## First, install the miniforge3 （https://github.com/conda-forge/miniforge）
 
 ## 1. MintPy & MiaplPy （Modified from https://github.com/insarlab/MiaplPy/blob/main/docs/installation.md）
 
@@ -14,12 +14,12 @@ cd ~/tools/MiaplPy
 ### 1.2 Install dependencies
 copy conda-env-rev.yml to MiaplPy
 ```
-mamba env create --file conda-env-rev.yml
+mamba env create --file mamba-env-rev.yml
 ```
 
 ### 1.3 Install MiaplPy via pip
 ```
-conda activate miaplpy-env
+mamba activate miaplpy-env
 python -m pip install .
 ```
 
@@ -50,7 +50,7 @@ gfortran@15 will report error in compilering the isce2
 mamba install git cmake pytest pybind11 opencv
 ```
 
-### 2.2 Compile ISCE2
+### 2.3 Compile ISCE2
 Make a link to make the installation path easier (-DPYTHON_MODULE_DIR not longer need)
 ```
 ln -sf `python3 -c 'import site; print(site.getsitepackages()[0])'` $CONDA_PREFIX/packages
@@ -76,6 +76,15 @@ Config and run isce2
 export ISCE_HOME="$CONDA_PREFIX/packages/isce"
 export PATH="$ISCE_HOME/applications:$PATH"
 ```
+check the install
+```
+python3 -c "import isce"
+```
 
+## 3. Accelerating the computing at the setp 2 of MiaplPy called phasing linking.
+```
+mamba install "libblas=*=*accelerate" "liblapack=*=*accelerate"
+```
+Notice: If do not install the accelerated edition above the phasing linking will be very very slow, and it will be slower about 10 times than the accelerated edtion. 
 
 
