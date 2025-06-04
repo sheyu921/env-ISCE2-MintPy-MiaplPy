@@ -19,7 +19,7 @@ mamba env create --file mamba-env-rev.yml
 
 ### 1.3 Install MiaplPy via pip
 ```
-mamba activate miaplpy-env
+mamba activate insar
 python -m pip install .
 ```
 
