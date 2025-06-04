@@ -46,7 +46,36 @@ brew install gfortran@14
 gfortran@15 will report error in compilering the isce2
 
 ### 2.2 Install dependencies
+```
 mamba install git cmake pytest pybind11 opencv
+```
+
+### 2.2 Compile ISCE2
+Make a link to make the installation path easier (-DPYTHON_MODULE_DIR not longer need)
+```
+ln -sf `python3 -c 'import site; print(site.getsitepackages()[0])'` $CONDA_PREFIX/packages
+```
+Download ISCE2 from github
+```
+git clone https://github.com/isce-framework/isce2.git
+```
+Compile ISCE2 with cmake
+```
+cd isce2
+mkdir build && cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
+         -DCMAKE_PREFIX_PATH=${CONDA_PREFIX} \
+         -DCMAKE_C_COMPILER="/opt/homebrew/bin/gcc-14" \
+         -DCMAKE_CXX_COMPILER="/opt/homebrew/bin/g++-14" \
+         -DCMAKE_Fortran_COMPILER="/opt/homebrew/bin/gfortran-14"
+make -j # to use multiple threads
+make install       
+```
+Config and run isce2
+```
+export ISCE_HOME="$CONDA_PREFIX/packages/isce"
+export PATH="$ISCE_HOME/applications:$PATH"
+```
 
 
 
