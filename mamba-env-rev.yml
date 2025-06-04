@@ -1,0 +1,33 @@
+# create environment : mamba env create -f mamba-env-rev.yml
+# remove environment : mamba env remove -n insar
+# enter  environment : mamba activate insar
+# exit   environment : mamba deactivate
+name: insar
+channels:
+  - conda-forge
+dependencies:
+  - c-compiler
+  - python>=3.11
+  - cartopy
+  - cvxopt
+  - rasterio
+  - dask>=1.0
+  - dask-jobqueue>=0.3
+  - defusedxml
+  - h5py
+  - lxml
+  - matplotlib
+  - numpy
+  - pip
+  - pyproj
+  - scikit-image
+  - scipy
+  - gdal
+  - mintpy=1.6.1
+  - cython
+  - setuptools
+  - pulp
+  - pyaps3>=0.3
+  - pykml>=0.2
+  - pyresample
+  - pysolid
